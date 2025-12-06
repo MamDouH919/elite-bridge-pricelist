@@ -49,6 +49,8 @@ export default function AmerForm() {
   const [services, setServices] = useState<AmerService[]>(defaultAmerData)
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
+  console.log({services});
+  
 
   useEffect(() => {
     fetchServices()

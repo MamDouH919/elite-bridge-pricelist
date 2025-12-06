@@ -10,60 +10,82 @@ interface TasheelService {
   _id?: string
   name: string
   nameAr?: string
-  price: number
+  phone: string
 }
 
 const defaultTasheelData: TasheelService[] = [
-  { name: "COMPANY FEES", price: 115 },
-  { name: "NEW E-SIGNATURE CARD", price: 115 },
-  { name: "PRO CARD", price: 115 },
-  { name: "QUOTA MODIFY", price: 76 },
-  { name: "NEW QUOTA", price: 76 },
-  { name: "QUOTA CANCELATION", price: 76 },
-  { name: "WORK PERMIT (Golden visa,family visa)", price: 128 },
-  { name: "WORK PERMIT (1 YEAR & 6 MONTHS)", price: 128 },
-  { name: "RENEWAL TYPING", price: 76 },
-  { name: "RENEWAL OFFICER LITTER", price: 126 },
-  { name: "GCC OFFER LETTER", price: 40 },
-  { name: "CERTIFICATE IT WHOM IT MAY CONCERN", price: 18 },
-  { name: "BIRTH TIME LABOUR FEES", price: 76 },
-  { name: "WORK PERMIT /LABOUR FEES (GOLDEN VISA,FAMILY VISA)", price: 326 },
-  { name: "INSPECTION", price: 485 },
-  { name: "CANCELLATION SUBMISSION", price: 76 },
-  { name: "RENEWAL SUBMISSION (category 2)", price: 1285 },
-  { name: "RENEWAL SUBMISSION (category 3)", price: 3550 },
-  { name: "TAW-JEEH", price: 153 },
-  { name: "MODIFICATION SUBMISSION", price: 76 },
-  { name: "WORK PERMIT SUBMISSION (GOLDEN VISA,FAMILY VISA)", price: 76 },
-  { name: "UPDATE PRE-APPROVAL", price: 76 },
-  { name: "GCC SUBMISSION", price: 40 },
-  { name: "PART-TIME SUBMISSION", price: 40 },
-  { name: "ABSCONDING REMOVE", price: 76 },
-  { name: "ABSCONDING REMOVAL SUBMISSION", price: 19 },
-  { name: "LABOUR CANCELLATION", price: 76 },
-  { name: "UNDO CANCELLATION", price: 76 },
-  { name: "UPDATE PERSONAL INFORMATION", price: 76 },
-  { name: "FILE NO. UPDATE", price: 18 },
-  { name: "PERSONAL NUMBER", price: 76 },
-  { name: "GENERAL REPORT ABOUT THE COMPANY", price: 19 },
-  { name: "EMPLOYEE LIST", price: 19 },
-  { name: "EMPLOYER LIST", price: 19 },
-  { name: "SIGNATURE CERTIFICATE", price: 19 },
-  { name: "TAW-TEEN REPORT", price: 19 },
-  { name: "CUSTOMER SERVICES", price: 38 },
-  { name: "OFFER LETTER", price: 276 },
-  { name: "LABOUR FEES (category 2 )", price: 1285 },
-  { name: "LABOUR FEES (category 3)", price: 3550 },
-  { name: "OPEN NEW FILE (company)", price: 523 },
-  { name: "COMPANY UPDATE", price: 523 },
+  {
+    name: "TAS-HEEL Services",
+    nameAr: "تسهيل",
+    phone: ""
+  },
+  {
+    name: "TAW-JEEH Services",
+    nameAr: "توجيه",
+    phone: ""
+  },
+  {
+    name: "Amer Services",
+    nameAr: "امر",
+    phone: ""
+  },
+  {
+    name: "Commercial Office Rent",
+    nameAr: "توفير المكاتب التجارية",
+    phone: ""
+  },
+  {
+    name: "DED Services",
+    nameAr: "خدمة دائرة التنمية الاقتصادية",
+    phone: ""
+  },
+  {
+    name: "Immigration & Visa Services",
+    nameAr: "خدمات الهجرة والتأشيرات",
+    phone: ""
+  },
+  {
+    name: "Ministry Of Labor Services",
+    nameAr: "خدمات وزارة الموارد البشرية والتوطين",
+    phone: ""
+  },
+  {
+    name: "Municipality Services",
+    nameAr: "خدمات البلدية",
+    phone: ""
+  },
+  {
+    name: "Translation Services",
+    nameAr: "خدمات الترجمة",
+    phone: ""
+  },
+  {
+    name: "Medical Insurance Services",
+    nameAr: "خدمات التأمين الطبي",
+    phone: ""
+  },
+  {
+    name: "RTA Services",
+    nameAr: "خدمات هيئة الطرق والمواصلات",
+    phone: ""
+  },
+  {
+    name: "PRO Services",
+    nameAr: "خدمات تخليص المعاملات الحكومية",
+    phone: ""
+  },
+  {
+    name: "Emirates id services",
+    nameAr: "خدمات الهويه الاماراتيه",
+    phone: ""
+  }
 ]
 
-export default function TasheelForm() {
+
+export default function ServicesForm() {
   const [services, setServices] = useState<TasheelService[]>(defaultTasheelData)
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
-
-  console.log({services});
 
   useEffect(() => {
     fetchServices()
@@ -72,7 +94,7 @@ export default function TasheelForm() {
   const fetchServices = async () => {
     try {
       setLoading(true)
-      const response = await fetch("/api/services?type=tasheel")
+      const response = await fetch("/api/services-data")
       if (response.ok) {
         const data = await response.json()
         setServices(data.length > 0 ? data : defaultTasheelData)
@@ -93,14 +115,14 @@ export default function TasheelForm() {
   const handleSave = async () => {
     try {
       setSaving(true)
-      const response = await fetch("/api/services", {
+      const response = await fetch("/api/services-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "tasheel", services }),
+        body: JSON.stringify({  services }),
       })
 
       if (response.ok) {
-        alert("TASHEEL services saved successfully!")
+        alert("services saved successfully!")
       } else {
         alert("Failed to save services")
       }
@@ -145,9 +167,8 @@ export default function TasheelForm() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
                 <Input
-                  type="number"
-                  value={service.price}
-                  onChange={(e) => handleInputChange(index, "price", Number.parseFloat(e.target.value) || 0)}
+                  value={service.phone}
+                  onChange={(e) => handleInputChange(index, "phone", e.target.value)}
                   placeholder="Price"
                 />
               </div>
@@ -157,7 +178,7 @@ export default function TasheelForm() {
       ))}
 
       <Button onClick={handleSave} className="w-full mt-6" disabled={saving}>
-        {saving ? "Saving..." : "Save TASHEEL Services"}
+        {saving ? "Saving..." : "Save Services"}
       </Button>
     </div>
   )

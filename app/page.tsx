@@ -2,6 +2,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import AmerForm from "@/components/amer-form"
 import TasheelForm from "@/components/tasheel-form"
+import ServicesForm from "@/components/services"
 
 export default function Home() {
   return (
@@ -14,9 +15,10 @@ export default function Home() {
 
         <div className="bg-white rounded-lg shadow-lg p-6">
           <Tabs defaultValue="amer" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="amer">AMER Services</TabsTrigger>
               <TabsTrigger value="tasheel">TAS-HEEL Services</TabsTrigger>
+              <TabsTrigger value="services">Services</TabsTrigger>
             </TabsList>
 
             <TabsContent value="amer" className="mt-6">
@@ -25,6 +27,10 @@ export default function Home() {
 
             <TabsContent value="tasheel" className="mt-6">
               <TasheelForm />
+            </TabsContent>
+
+            <TabsContent value="services" className="mt-6">
+              <ServicesForm />
             </TabsContent>
           </Tabs>
         </div>
