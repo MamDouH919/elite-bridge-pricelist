@@ -169,7 +169,7 @@ export default function ServicesForm() {
                 <Input
                   value={service.phone}
                   onChange={(e) => handleInputChange(index, "phone", e.target.value)}
-                  placeholder="Price"
+                  placeholder="Phone"
                 />
               </div>
             </div>
