@@ -165,7 +165,7 @@ export default function ServicesForm() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                 <Input
                   value={service.phone}
                   onChange={(e) => handleInputChange(index, "phone", e.target.value)}
